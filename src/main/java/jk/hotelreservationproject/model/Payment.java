@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -20,7 +21,8 @@ public class Payment {
     @JoinColumn (name= "client_id")
     private Client client_id;
     @OneToMany
-    @JoinColumn(name = "payment_reservations")
-    private Reservation reservation;
+    @JoinColumn(name = "reservations")
+    private List<Reservation> reservations;
+    private double sum;
 
 }

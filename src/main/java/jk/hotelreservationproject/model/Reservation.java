@@ -22,9 +22,6 @@ public class Reservation {
     private Client client_id;
     private LocalDateTime firstDay;
     private LocalDateTime lastDay;
-    @OneToOne
-    @JoinColumn(name = "price_id")
-    private Price price_id;
     private int numberOfGuests;
 
 
