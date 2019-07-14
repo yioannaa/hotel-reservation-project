@@ -7,16 +7,21 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Room {
+public class RoomClass {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id;
-    private int number;
     @Enumerated
-    private RoomClassCategory classCategory;
+    private RoomClassCategory category;
+    private boolean balcony;
+    private boolean breakfast;
+    private double area;
+    private double price;
+
 }
