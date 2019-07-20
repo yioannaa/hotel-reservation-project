@@ -23,5 +23,6 @@ public class RoomClass {
     private boolean breakfast;
     private double area;
     private double price;
+    private double childPrice;
 
 }
