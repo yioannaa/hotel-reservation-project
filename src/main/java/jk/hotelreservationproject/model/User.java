@@ -31,17 +31,12 @@ public class User {
     @NotBlank
     @Size(min=6, message = "Password must have at least 6 characters)")
     private String password_confirm;
+    @OneToOne
+    @JoinColumn (name ="role_id")
+    private Role roleId;
 
-    @ManyToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
 
     public void addRole(Role role){
-        this.roles.add(role);
     }
 
 

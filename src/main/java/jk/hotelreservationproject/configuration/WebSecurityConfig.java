@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and()
                 .csrf().disable()
-                .formLogin().loginPage("/login")
+                .formLogin()
                 .usernameParameter("login")
                 .passwordParameter("password")
                 .loginProcessingUrl("/login-process")
