@@ -17,9 +17,13 @@ public class Reservation {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id;
+    private String name;
+    private String lastName;
+    private String phone;
+    private LocalDateTime registration_date = LocalDateTime.now();
     @OneToOne
-    @JoinColumn (name = "client_id")
-    private Client client_id;
+    @JoinColumn (name = "user_id")
+    private User user_id;
     private LocalDateTime firstDay;
     private LocalDateTime lastDay;
     private int numberOfGuests;

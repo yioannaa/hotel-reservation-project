@@ -17,11 +17,8 @@ public class Payment {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne
-    @JoinColumn (name= "client_id")
-    private Client client_id;
     @OneToMany
-    @JoinColumn(name = "reservations")
+    @JoinColumn(name = "reservations_id")
     private List<Reservation> reservations;
     private double sum;
 
