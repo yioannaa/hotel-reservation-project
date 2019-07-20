@@ -31,7 +31,7 @@ public class User {
     @NotBlank
     @Size(min=6, message = "Password must have at least 6 characters)")
     private String password_confirm;
-    @OneToOne
+    @ManyToOne
     @JoinColumn (name ="role_id")
     private Role roleId;
 

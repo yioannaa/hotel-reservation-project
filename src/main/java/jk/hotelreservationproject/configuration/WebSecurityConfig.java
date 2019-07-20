@@ -52,12 +52,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
-                .usersByUsernameQuery("SELECT u.email, u.password FROM user u WHERE u.email = ?")
-                .authoritiesByUsernameQuery("SELECT u.email, r.role_name FROM " +
-                        "user u  JOIN user_role ur ON (u.id = ur.user_id) " +
-                        "JOIN role r ON (r.id = ur.role_id) " +
-                        "WHERE u.email = ?")
-                .dataSource(dataSource).passwordEncoder(passwordEncoder);
+                .usersByUsernameQuery("SELECT u.email, u.password, true FROM user u WHERE u.email = ?")
+                .authoritiesByUsernameQuery("SELECT u.email, r.role_name FROM user u JOIN role r " +
+                        "ON (u.role_id = r.id) WHERE u.email = ?")
+                .dataSource(dataSource)
+                .passwordEncoder(passwordEncoder);
 
     }
 
