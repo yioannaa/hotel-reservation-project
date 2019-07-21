@@ -8080,6 +8080,11 @@ h1, h2, h3, h4, h5,
   .form-control:focus, .form-control:active {
     border-color: #000000; }
 
+span.error{
+  background-color: #0c5460;
+  color: #FFFFFF;
+}
+
 textarea.form-control {
   height: inherit !important; }
 
@@ -8649,7 +8654,7 @@ textarea.form-control {
       line-height: 40px;
       border-radius: 50%;
       border: 1px solid #c9af7e; }
-    .block-27 ul li.active a, .block-27 ul li.active span {
+      .block-27 ul li.active a, .block-27 ul li.active span {
       background: #c9af7e;
       color: #8d703b;
       border: 1px solid transparent; }
