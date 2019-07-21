@@ -30,21 +30,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/about").hasAnyAuthority("ROLE_CLIENT", "ROLE_ADMIN")
+        http.authorizeRequests()
+                .antMatchers("/about", "/contact").hasAnyAuthority("ROLE_CLIENT", "ROLE_ADMIN")
                 .antMatchers("/rooms").hasAnyAuthority("ROLE_ADMIN")
                 .anyRequest().permitAll()
-                .and()
-                .csrf().disable()
-                .formLogin()
+        .and().csrf().disable()
+        .formLogin().loginPage("/login")
                 .usernameParameter("login")
                 .passwordParameter("password")
                 .loginProcessingUrl("/login-process")
 //                .failureUrl("/errorLogin")
                 .defaultSuccessUrl("/")
-                .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/");
+        .and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
 
     }
 
@@ -53,8 +50,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
                 .usersByUsernameQuery("SELECT u.email, u.password, true FROM user u WHERE u.email = ?")
-                .authoritiesByUsernameQuery("SELECT u.email, r.role_name FROM user u JOIN role r " +
-                        "ON (u.role_id = r.id) WHERE u.email = ?")
+                .authoritiesByUsernameQuery("SELECT u.email, r.role_name FROM " +
+                        "user u JOIN role r " +
+                        "ON (u.role_id = r.id) " +
+                        "WHERE u.email = ?")
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder);
 
