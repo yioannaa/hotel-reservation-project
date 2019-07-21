@@ -15,7 +15,6 @@ public class HotelController {
     public String home(Model model, Authentication auth){
         if (auth != null){
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
-            //przekierowuję do widoku zalogowanego użytkownika
             model.addAttribute("loggedEmail", userDetails.getUsername());
         }
 
