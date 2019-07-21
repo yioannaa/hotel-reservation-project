@@ -16,7 +16,6 @@ public class UserService {
 
 
     @Autowired
-
     public UserService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
@@ -24,7 +23,7 @@ public class UserService {
     }
 
     public void registerUser(User user){
-        user.addRole(roleRepository.getOne(1L));
+        user.setRoleId(roleRepository.getOne(1L));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }

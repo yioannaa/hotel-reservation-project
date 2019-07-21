@@ -36,9 +36,7 @@ public class User {
     private Role roleId;
 
 
-    public void addRole(Role roleId){
-        setRoleId(roleId);
-    }
+
 
 
 
