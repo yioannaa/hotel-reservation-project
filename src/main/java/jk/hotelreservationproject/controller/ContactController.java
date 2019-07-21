@@ -18,8 +18,8 @@ import javax.validation.Valid;
 @Controller
 public class ContactController {
 
-    ContactService contactService;
-    AutoMailingService autoMailingService;
+    private ContactService contactService;
+    private AutoMailingService autoMailingService;
 
     @Autowired
     public ContactController(ContactService contactService, AutoMailingService autoMailingService) {
