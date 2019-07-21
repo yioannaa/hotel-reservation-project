@@ -49,7 +49,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String loginUser(){
-        return  "redirect:/login";
+        return  "/login";
     }
 
 
