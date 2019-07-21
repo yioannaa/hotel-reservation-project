@@ -13,9 +13,9 @@ public class ErrrorPageController implements ErrorController {
 
     }
 
-    @GetMapping("/error")
-    public String errorPage (Model model){
-        model.addAttribute("info","This address does not exist");
-        return "error-page";
-    }
+//    @GetMapping("/error")
+//    public String errorPage (Model model){
+//        model.addAttribute("info","This address does not exist");
+//        return "error-page";
+//    }
 }
