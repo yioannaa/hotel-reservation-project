@@ -28,4 +28,11 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
+
+    public boolean passwordCheck(String password, String password_confirm){
+        if (password.equals(password_confirm)){
+            return true;
+        }
+        return false;
+    }
 }
