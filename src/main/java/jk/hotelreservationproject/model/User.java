@@ -25,11 +25,11 @@ public class User {
     @NotBlank(message = "E-mail cannot be empty")
     private String email;
     @NotBlank
-    @Size(min=6, message = "Password must have at least 6 characters)")
+    @Size(min=6, message = "Password must have at least 6 characters")
     private String password;
     @Transient
     @NotBlank
-    @Size(min=6, message = "Password must have at least 6 characters)")
+    @Size(min=6, message = "Password must have at least 6 characters")
     private String password_confirm;
     @ManyToOne
     @JoinColumn (name ="role_id")
