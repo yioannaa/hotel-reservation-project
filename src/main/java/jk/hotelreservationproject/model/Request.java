@@ -11,24 +11,16 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Reservation {
+public class Request{
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
-    private String lastName;
-    @NotBlank(message = "E-mail cannot be blank")
-    @Email(message = "Invalid e-mail address")
-    private String email;
-    @Size(min = 9, message = "Invalid phone number")
-    private String phone;
-    private LocalDateTime registration_date = LocalDateTime.now();
+    private LocalDateTime request_date = LocalDateTime.now();
     @OneToOne
     @JoinColumn (name = "user_id")
     private User user_id;
@@ -42,8 +34,5 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category roomCategory;
-
-
-
 
 }

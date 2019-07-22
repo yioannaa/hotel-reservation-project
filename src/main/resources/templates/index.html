@@ -88,13 +88,17 @@
     	<div class="container">
     		<div class="row">
     			<div class="col-lg-12">
-    				<form action="#" class="booking-form">
+    				<form th:action="@{/addrequest}"
+						  th:object="${request}"
+						  th:method="post"
+						  name="sentRequest" class="booking-form">
 	        		<div class="row">
 	        			<div class="col-md-3 d-flex">
 	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 	        					<div class="wrap">
 				    					<label for="#">Check-in Date</label>
-				    					<input type="text" class="form-control checkin_date" placeholder="Check-in date">
+<!--									th:field="*{firstDay}"-->
+				    					<input type="text"  class="form-control checkin_date" placeholder="Check-in date">
 			    					</div>
 			    				</div>
 	        			</div>
@@ -102,7 +106,8 @@
 	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 	        					<div class="wrap">
 				    					<label for="#">Check-out Date</label>
-				    					<input type="text" class="form-control checkout_date" placeholder="Check-out date">
+<!--									th:field="*{lastDay}"-->
+				    					<input  type="text" class="form-control checkout_date" placeholder="Check-out date">
 			    				</div>
 			    				</div>
 	        			</div>
@@ -113,6 +118,7 @@
 			      					<div class="form-field">
 			        					<div class="select-wrap">
 			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+<!--											th:field="*{roomCategory}"-->
 			                    <select class="form-control" >
 									<option th:each="c : ${categories}"
 											th:value="${c.id}"
@@ -131,6 +137,7 @@
 			      					<div class="form-field">
 			        					<div class="select-wrap">
 			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+<!--											th:field="*{numberOfGuests}"-->
 			                    <select name="" id="" class="form-control">
 			                    	<option value="">1 Adult</option>
 			                      <option value="">2 Adult</option>
