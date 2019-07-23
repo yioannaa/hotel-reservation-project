@@ -23,7 +23,7 @@ public class RoomController {
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
             model.addAttribute("loggedEmail", userDetails.getUsername());
         }
-        return "/rooms";
+        return "rooms";
     }
 //    @GetMapping("/rooms/{roomCategory_id}")
 //    public String showRoomByCategory(@PathVariable Long category_id, Model model) {
@@ -32,45 +32,47 @@ public class RoomController {
 //        return "";
 //    }
 
-    @GetMapping("/rooms/classic-room")
+    @GetMapping("/classic-room")
     public String showClassicRoom(Model model, Authentication auth) {
 
         if (auth != null){
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
             model.addAttribute("loggedEmail", userDetails.getUsername());
         }
-        return "/classic-room";
+        return "classic-room";
     }
 
-    @GetMapping("/rooms/family-room")
+    @GetMapping("/family-room")
     public String showFamilyRoom(Model model, Authentication auth) {
 
         if (auth != null){
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
             model.addAttribute("loggedEmail", userDetails.getUsername());
         }
-        return "/family-room";
+        return "family-room";
     }
 
-    @GetMapping("/rooms/deluxe-room")
+    @GetMapping("/deluxe-room")
     public String showDeluxeRoom(Model model, Authentication auth) {
 
         if (auth != null){
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
             model.addAttribute("loggedEmail", userDetails.getUsername());
         }
-        return "/deluxe-room";
+        return "deluxe-room";
     }
 
-    @GetMapping("/rooms/dormitory-room")
+    @GetMapping("/dormitory-room")
     public String showDormitoryRoom(Model model, Authentication auth) {
 
         if (auth != null){
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
             model.addAttribute("loggedEmail", userDetails.getUsername());
         }
-        return "/dormitory-room";
+        return "dormitory-room";
     }
+
+
 
 
 

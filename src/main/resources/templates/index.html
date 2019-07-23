@@ -106,20 +106,18 @@
 			    				</div>
 			    				</div>
 	        			</div>
-	        			<div class="col-md d-flex">
+	        			<div class="col-md-2 d-flex">
 	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 	        					<div class="wrap">
 			      					<label for="#">Room</label>
 			      					<div class="form-field">
 			        					<div class="select-wrap">
 			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-			                    <select name="" id="" class="form-control">
-			                    	<option value="">Suite</option>
-			                      <option value="">Family Room</option>
-			                      <option value="">Deluxe Room</option>
-			                      <option value="">Classic Room</option>
-			                      <option value="">Superior Room</option>
-			                      <option value="">Luxury Room</option>
+                                            <select class="form-control" >
+                                                <option th:each="c : ${categories}"
+                                                        th:value="${c.id}"
+                                                        th:utext="${c.categoryName}">
+                                                </option>
 			                    </select>
 			                  </div>
 				              </div>

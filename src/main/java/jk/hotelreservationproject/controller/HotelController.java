@@ -58,13 +58,4 @@ public class HotelController {
         return "/restaurant";
     }
 
-//    @GetMapping("/rooms")
-//    public String showRooms(Model model, Authentication auth){
-//        if (auth != null){
-//            UserDetails userDetails = (UserDetails) auth.getPrincipal();
-//            model.addAttribute("loggedEmail", userDetails.getUsername());
-//        }
-//        return "/rooms";
-//    }
-
 }
