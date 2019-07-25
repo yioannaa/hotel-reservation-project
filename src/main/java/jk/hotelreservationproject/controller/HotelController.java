@@ -4,8 +4,10 @@ package jk.hotelreservationproject.controller;
 import jk.hotelreservationproject.model.Category;
 import jk.hotelreservationproject.model.Request;
 import jk.hotelreservationproject.model.Reservation;
+import jk.hotelreservationproject.model.User;
 import jk.hotelreservationproject.service.CategoryService;
 import jk.hotelreservationproject.service.RequestService;
+import jk.hotelreservationproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,11 +27,14 @@ public class HotelController {
 
     private RequestService requestService;
     private CategoryService categoryService;
+    private UserService userService;
+
 
     @Autowired
-    public HotelController(RequestService requestService, CategoryService categoryService) {
+    public HotelController(RequestService requestService, CategoryService categoryService, UserService userService) {
         this.requestService = requestService;
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -52,11 +57,14 @@ public class HotelController {
 
     @GetMapping("/addrequest")
     public String checkAvailability(Model model, Authentication auth){
+        Request request = new Request();
         if (auth != null){
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
             model.addAttribute("loggedEmail", userDetails.getUsername());
+            request.setUser(userService.getUserByEmail(userDetails.getUsername()));
+            System.out.println(userService.getUserByEmail(userDetails.getUsername()));
         }
-        model.addAttribute("request", new Request());
+        model.addAttribute("request", request);
         return "/request";
     }
 

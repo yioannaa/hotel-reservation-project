@@ -34,4 +34,12 @@ public class UserService {
         }
         return false;
     }
+
+    public User getUserById(Long user_id){
+        return userRepository.getOne(user_id);
+    }
+
+    public User getUserByEmail(String email){
+        return  userRepository.getUserByEmail(email);
+    }
 }
