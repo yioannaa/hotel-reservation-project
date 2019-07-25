@@ -4,7 +4,6 @@ package jk.hotelreservationproject.controller;
 import jk.hotelreservationproject.model.Category;
 import jk.hotelreservationproject.model.Request;
 import jk.hotelreservationproject.model.Reservation;
-import jk.hotelreservationproject.model.User;
 import jk.hotelreservationproject.service.CategoryService;
 import jk.hotelreservationproject.service.RequestService;
 import jk.hotelreservationproject.service.UserService;
@@ -17,9 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.jws.WebParam;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -39,13 +35,16 @@ public class HotelController {
 
     @GetMapping("/")
     public String home(Model model, Authentication auth){
+        Request request = new Request();
         if (auth != null){
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
             model.addAttribute("loggedEmail", userDetails.getUsername());
+            request.setUser(userService.getUserByEmail(userDetails.getUsername()));
+            System.out.println(userService.getUserByEmail(userDetails.getUsername()));
         }
         List<Category> categories = categoryService.showAllCategories();
         model.addAttribute("categories", categories);
-        model.addAttribute("request", new Request());
+        model.addAttribute("request", request);
         System.out.println(categories);
         return "/index";
     }
@@ -57,14 +56,12 @@ public class HotelController {
 
     @GetMapping("/addrequest")
     public String checkAvailability(Model model, Authentication auth){
-        Request request = new Request();
+        Reservation reservation = new Reservation();
         if (auth != null){
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
             model.addAttribute("loggedEmail", userDetails.getUsername());
-            request.setUser(userService.getUserByEmail(userDetails.getUsername()));
-            System.out.println(userService.getUserByEmail(userDetails.getUsername()));
         }
-        model.addAttribute("request", request);
+        model.addAttribute("reservation", reservation);
         return "/request";
     }
 
@@ -73,7 +70,6 @@ public class HotelController {
         requestService.saveRequest(request);
         return "/request";
     }
-
 
     @GetMapping("/about")
     public String about(Model model, Authentication auth){

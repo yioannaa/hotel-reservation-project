@@ -31,12 +31,12 @@ public class Reservation {
     private LocalDateTime registration_date = LocalDateTime.now();
     @OneToOne
     @JoinColumn (name = "user_id")
-    private User user_id;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotBlank(message = "Arrival date cannot be blank")
+    private User user;
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+//    @NotBlank(message = "Arrival date cannot be blank")
     private LocalDateTime firstDay;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotBlank(message = "Departure date cannot be blank")
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+//    @NotBlank(message = "Arrival date cannot be blank")
     private LocalDateTime lastDay;
     private int numberOfGuests;
     @ManyToOne
@@ -44,6 +44,16 @@ public class Reservation {
     private Category roomCategory;
 
 
-
-
+    public Reservation(Request request, String name, String lastName, @Size(min = 9, message = "Invalid phone number") String phone, LocalDateTime registration_date) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = request.getEmail();
+        this.phone = phone;
+        this.registration_date = registration_date;
+        this.user = request.getUser();
+        this.firstDay = request.getFirstDay();
+        this.lastDay = request.getLastDay();
+        this.numberOfGuests = request.getNumberOfGuests();
+        this.roomCategory = request.getRoomCategory();
+    }
 }
