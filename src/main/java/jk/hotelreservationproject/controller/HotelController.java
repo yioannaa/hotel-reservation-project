@@ -40,6 +40,7 @@ public class HotelController {
         }
         List<Category> categories = categoryService.showAllCategories();
         model.addAttribute("categories", categories);
+        model.addAttribute("request", new Request());
         System.out.println(categories);
         return "/index";
     }
@@ -55,8 +56,8 @@ public class HotelController {
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
             model.addAttribute("loggedEmail", userDetails.getUsername());
         }
-        model.addAttribute("request", new Reservation());
-        return "addrequest";
+        model.addAttribute("request", new Request());
+        return "/request";
     }
 
     @PostMapping("/addrequest")

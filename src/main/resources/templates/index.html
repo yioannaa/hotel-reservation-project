@@ -97,8 +97,7 @@
 	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 	        					<div class="wrap">
 				    					<label for="#">Check-in Date</label>
-<!--									th:field="*{firstDay}"-->
-				    					<input type="text"  class="form-control checkin_date" placeholder="Check-in date">
+				    					<input type="text" th:field="*{firstDay}" class="form-control checkin_date" placeholder="Check-in date">
 			    					</div>
 			    				</div>
 	        			</div>
@@ -106,8 +105,7 @@
 	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 	        					<div class="wrap">
 				    					<label for="#">Check-out Date</label>
-<!--									th:field="*{lastDay}"-->
-				    					<input  type="text" class="form-control checkout_date" placeholder="Check-out date">
+				    					<input th:field="*{lastDay}" type="text" class="form-control checkout_date" placeholder="Check-out date">
 			    				</div>
 			    				</div>
 	        			</div>
@@ -118,8 +116,7 @@
 			      					<div class="form-field">
 			        					<div class="select-wrap">
 			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-<!--											th:field="*{roomCategory}"-->
-			                    <select class="form-control" >
+			                    <select class="form-control" th:field="*{roomCategory}">
 									<option th:each="c : ${categories}"
 											th:value="${c.id}"
 											th:utext="${c.categoryName}">
@@ -137,14 +134,13 @@
 			      					<div class="form-field">
 			        					<div class="select-wrap">
 			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-<!--											th:field="*{numberOfGuests}"-->
-			                    <select name="" id="" class="form-control">
-			                    	<option value="">1 Adult</option>
-			                      <option value="">2 Adult</option>
-			                      <option value="">3 Adult</option>
-			                      <option value="">4 Adult</option>
-			                      <option value="">5 Adult</option>
-			                      <option value="">6 Adult</option>
+			                    <select name="" id="" class="form-control" th:field="*{numberOfGuests}">
+			                    	<option value="1">1 Adult</option>
+			                      <option value="2">2 Adult</option>
+			                      <option value="3">3 Adult</option>
+			                      <option value="4">4 Adult</option>
+			                      <option value="5">5 Adult</option>
+			                      <option value="6">6 Adult</option>
 			                    </select>
 			                  </div>
 				              </div>
