@@ -22,7 +22,7 @@ public class Request{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private LocalDateTime request_date = LocalDateTime.now();
-    @OneToOne
+    @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;
     private String email;

@@ -4,9 +4,7 @@ package jk.hotelreservationproject.controller;
 import jk.hotelreservationproject.model.Category;
 import jk.hotelreservationproject.model.Request;
 import jk.hotelreservationproject.model.Reservation;
-import jk.hotelreservationproject.service.CategoryService;
-import jk.hotelreservationproject.service.RequestService;
-import jk.hotelreservationproject.service.UserService;
+import jk.hotelreservationproject.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,15 +20,18 @@ import java.util.List;
 public class HotelController {
 
     private RequestService requestService;
+    private ReservationService reservationService;
     private CategoryService categoryService;
     private UserService userService;
-
+    private AutoMailingService autoMailingService;
 
     @Autowired
-    public HotelController(RequestService requestService, CategoryService categoryService, UserService userService) {
+    public HotelController(RequestService requestService, ReservationService reservationService, CategoryService categoryService, UserService userService, AutoMailingService autoMailingService) {
         this.requestService = requestService;
+        this.reservationService = reservationService;
         this.categoryService = categoryService;
         this.userService = userService;
+        this.autoMailingService = autoMailingService;
     }
 
     @GetMapping("/")
@@ -66,9 +67,12 @@ public class HotelController {
     }
 
     @PostMapping("/addrequest")
-    public String checkAvailability(@ModelAttribute Request request, Authentication auth){
-        requestService.saveRequest(request);
-        return "/request";
+    public String checkAvailability(@ModelAttribute Reservation reservation, Authentication auth){
+        reservationService.saveReservation(reservation);
+        autoMailingService.sendMessage(reservation.getEmail(),
+                "Hotel Message Confirmation",
+                "Thank you for your message :)");
+        return "redirect:/";
     }
 
     @GetMapping("/about")

@@ -29,7 +29,7 @@ public class Reservation {
     @Size(min = 9, message = "Invalid phone number")
     private String phone;
     private LocalDateTime registration_date = LocalDateTime.now();
-    @OneToOne
+    @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;
     @DateTimeFormat(pattern = "MM/dd/yyyy")
