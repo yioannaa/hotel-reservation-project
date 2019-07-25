@@ -21,13 +21,13 @@ public class Reservation {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
-    private String lastName;
+    private String name = "";
+    private String lastName = "";
     @NotBlank(message = "E-mail cannot be blank")
     @Email(message = "Invalid e-mail address")
-    private String email;
+    private String email = "";
     @Size(min = 9, message = "Invalid phone number")
-    private String phone;
+    private String phone ="";
     private LocalDateTime registration_date = LocalDateTime.now();
     @ManyToOne
     @JoinColumn (name = "user_id")

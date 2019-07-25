@@ -47,7 +47,7 @@ public class ContactController {
         contactService.addContact(contact);
         autoMailingService.sendMessage(contact.getEmail(),
                 "Hotel Message Confirmation",
-                "Thank you for your message :)");
+                "Thank you for your reservation :)");
         return "redirect:/";
     }
 
