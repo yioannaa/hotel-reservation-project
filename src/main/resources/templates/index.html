@@ -98,6 +98,7 @@
 	        					<div class="wrap">
 				    					<label for="#">Check-in Date</label>
 				    					<input type="text" th:field="*{firstDay}" class="form-control checkin_date" placeholder="Check-in date">
+										<p class="help-block text-danger" th:errors="*{firstDay}"></p>
 			    					</div>
 			    				</div>
 	        			</div>
@@ -106,6 +107,7 @@
 	        					<div class="wrap">
 				    					<label for="#">Check-out Date</label>
 				    					<input th:field="*{lastDay}" type="text" class="form-control checkout_date" placeholder="Check-out date">
+										<p class="help-block text-danger" th:errors="*{lastDay}"></p>
 			    				</div>
 			    				</div>
 	        			</div>

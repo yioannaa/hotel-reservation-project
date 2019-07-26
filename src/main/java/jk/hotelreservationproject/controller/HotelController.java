@@ -44,7 +44,6 @@ public class HotelController {
         List<Category> categories = categoryService.showAllCategories();
         model.addAttribute("categories", categories);
         model.addAttribute("request", request);
-        System.out.println(categories);
         return "/index";
     }
 

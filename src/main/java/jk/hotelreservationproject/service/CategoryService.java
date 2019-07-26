@@ -5,7 +5,6 @@ import jk.hotelreservationproject.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Service

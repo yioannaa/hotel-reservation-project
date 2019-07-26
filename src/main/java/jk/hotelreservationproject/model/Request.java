@@ -4,11 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import jk.hotelreservationproject.validation.ValidateDateRange;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+//@ValidateDateRange(start = "firstDay", end = "lastDay", message = "{validation.date.range_error}", equal = true)
 public class Request{
 
     @Id
@@ -26,9 +27,11 @@ public class Request{
     @JoinColumn (name = "user_id")
     private User user;
     private String email;
+    @FutureOrPresent(message = "Date is in past")
     @DateTimeFormat(pattern = "MM/dd/yyyy")
 //    @NotBlank(message = "Arrival date cannot be blank")
     private LocalDateTime firstDay;
+    @Future(message = "use only future date")
     @DateTimeFormat(pattern = "MM/dd/yyyy")
 //    @NotBlank(message = "Departure date cannot be blank")
     private LocalDateTime lastDay;
