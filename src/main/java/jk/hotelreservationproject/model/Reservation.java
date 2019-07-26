@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -21,13 +22,13 @@ public class Reservation {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id;
-    private String name = "";
-    private String lastName = "";
+    private String name;
+    private String lastName;
     @NotBlank(message = "E-mail cannot be blank")
     @Email(message = "Invalid e-mail address")
-    private String email = "";
+    private String email;
     @Size(min = 9, message = "Invalid phone number")
-    private String phone ="";
+    private String phone;
     private LocalDateTime registration_date = LocalDateTime.now();
     @ManyToOne
     @JoinColumn (name = "user_id")
@@ -56,4 +57,5 @@ public class Reservation {
         this.numberOfGuests = request.getNumberOfGuests();
         this.roomCategory = request.getRoomCategory();
     }
+
 }
