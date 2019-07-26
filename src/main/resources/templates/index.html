@@ -121,6 +121,11 @@
 											th:value="${c.id}"
 											th:utext="${c.categoryName}">
 									</option>
+                                            <select class="form-control" >
+                                                <option th:each="c : ${categories}"
+                                                        th:value="${c.id}"
+                                                        th:utext="${c.categoryName}">
+                                                </option>
 			                    </select>
 			                  </div>
 				              </div>

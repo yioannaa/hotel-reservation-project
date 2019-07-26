@@ -5,6 +5,7 @@ import jk.hotelreservationproject.model.Category;
 import jk.hotelreservationproject.model.Request;
 import jk.hotelreservationproject.model.Reservation;
 import jk.hotelreservationproject.service.*;
+import jk.hotelreservationproject.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 import java.util.List;
 
@@ -32,6 +35,13 @@ public class HotelController {
         this.categoryService = categoryService;
         this.userService = userService;
         this.autoMailingService = autoMailingService;
+    }
+
+    private CategoryService categoryService;
+
+    @Autowired
+    public HotelController(CategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/")
@@ -88,6 +98,7 @@ public class HotelController {
     }
 
 
+
     @GetMapping("/about")
     public String about(Model model, Authentication auth){
         if (auth != null){
@@ -114,5 +125,6 @@ public class HotelController {
         }
         return "/rooms";
     }
+
 
 }
