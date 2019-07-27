@@ -4,7 +4,6 @@ import jk.hotelreservationproject.model.Category;
 import jk.hotelreservationproject.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -25,4 +24,5 @@ public class CategoryService {
     public Category showCategory(Long categoryId){
         return categoryRepository.getOne(categoryId);
     }
+
 }
