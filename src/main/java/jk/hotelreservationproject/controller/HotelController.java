@@ -37,12 +37,6 @@ public class HotelController {
         this.autoMailingService = autoMailingService;
     }
 
-    private CategoryService categoryService;
-
-    @Autowired
-    public HotelController(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
 
     @GetMapping("/")
     public String home(Model model, Authentication auth){

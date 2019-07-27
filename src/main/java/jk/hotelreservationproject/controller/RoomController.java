@@ -17,14 +17,7 @@ public class RoomController {
 
     RoomService roomService;
 
-    @GetMapping("/rooms")
-    public String showRooms(Model model, Authentication auth){
-        if (auth != null){
-            UserDetails userDetails = (UserDetails) auth.getPrincipal();
-            model.addAttribute("loggedEmail", userDetails.getUsername());
-        }
-        return "rooms";
-    }
+
 //    @GetMapping("/rooms/{roomCategory_id}")
 //    public String showRoomByCategory(@PathVariable Long category_id, Model model) {
 //
