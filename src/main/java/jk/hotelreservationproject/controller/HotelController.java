@@ -68,14 +68,13 @@ public class HotelController {
         return "/request";
     }
 
-    @PostMapping("/addrequest")
+    @PostMapping("/")
     public String checkAvailability(@ModelAttribute Request request,
-                                    Authentication auth, Model model,
+                                    Authentication auth,
+                                    Model model,
                                     BindingResult bindingResult){
-        if (bindingResult.hasErrors()){
-
-
-            return "/index";
+        if (bindingResult.hasErrors() ||!(request.isDateValid())){
+            return "redirect:/";
         }
         if (auth != null){
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
