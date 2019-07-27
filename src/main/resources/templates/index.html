@@ -88,7 +88,7 @@
     	<div class="container">
     		<div class="row">
     			<div class="col-lg-12">
-    				<form th:action="@{/addrequest}"
+    				<form th:action="@{/}"
 						  th:object="${request}"
 						  th:method="post"
 						  name="sentRequest" class="booking-form">
@@ -117,11 +117,6 @@
 			        					<div class="select-wrap">
 			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
 			                    <select class="form-control" th:field="*{roomCategory}">
-									<option th:each="c : ${categories}"
-											th:value="${c.id}"
-											th:utext="${c.categoryName}">
-									</option>
-                                            <select class="form-control" >
                                                 <option th:each="c : ${categories}"
                                                         th:value="${c.id}"
                                                         th:utext="${c.categoryName}">
