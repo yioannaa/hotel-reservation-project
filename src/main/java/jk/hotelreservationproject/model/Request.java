@@ -31,11 +31,11 @@ public class Request{
     @FutureOrPresent(message = "Date is in past")
     @DateTimeFormat(pattern = "MM/dd/yyyy")
 //    @NotBlank(message = "Arrival date cannot be blank")
-    private LocalDateTime firstDay;
+    private LocalDate firstDay;
     @Future(message = "use only future date")
     @DateTimeFormat(pattern = "MM/dd/yyyy")
 //    @NotBlank(message = "Departure date cannot be blank")
-    private LocalDateTime lastDay;
+    private LocalDate lastDay;
     private int numberOfGuests;
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -43,18 +43,18 @@ public class Request{
 
     public void setFirstDay(String firstDay) {
         String [] firstDayStr = firstDay.split("/");
-        this.firstDay = LocalDateTime.of(Integer.parseInt(firstDayStr[2]), Integer.parseInt(firstDayStr[0]),Integer.parseInt(firstDayStr[1]),0,0 );
+        this.firstDay = LocalDate.of(Integer.parseInt(firstDayStr[2]), Integer.parseInt(firstDayStr[0]),Integer.parseInt(firstDayStr[1]));
         this.firstDay.format(DateTimeFormatter.ofPattern("MM/dd/YYYY"));
     }
 
     public void setLastDay(String lastDay) {
         String [] lastDayStr = lastDay.split("/");
-        this.lastDay = LocalDateTime.of(Integer.parseInt(lastDayStr[2]), Integer.parseInt(lastDayStr[0]),Integer.parseInt(lastDayStr[1]),0,0 );
+        this.lastDay = LocalDate.of(Integer.parseInt(lastDayStr[2]), Integer.parseInt(lastDayStr[0]),Integer.parseInt(lastDayStr[1]));
         this.lastDay.format(DateTimeFormatter.ofPattern("MM/dd/YYYY"));
     }
 
     public boolean isDateValid(){
-        LocalDateTime today = LocalDate.now().atTime(0,0);
+        LocalDate today = LocalDate.now();
         if (firstDay.isBefore(today.plusDays(1))){
             return false;
         }
