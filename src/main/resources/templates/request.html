@@ -102,10 +102,10 @@
                 <p class="help-block text-danger" th:errors="*{phone}"></p>
               </div>
               <div class="form-group">
-                <input type="date" id="firstDay" th:field="*{firstDay}" class="form-control" placeholder="Arrival">
+                <input type="text" id="firstDay" th:value="${reservation.getFirstDay()}" class="form-control checkin_date" placeholder="Arrival">
               </div>
               <div class="form-group">
-                <input type="date" id="lastDay" th:field="*{lastDay}" class="form-control" placeholder="Departure">
+                <input type="text" id="lastDay" th:value="${reservation.getLastDay()}" class="form-control checkout_date" placeholder="Departure">
               </div>
               <div class="form-group">
                 <input type="submit" value="Send Reservation" class="btn btn-primary py-3 px-5">

@@ -59,7 +59,7 @@ public class HotelController {
         return home(request, model, auth);
     }
 
-    @GetMapping("/addrequest")
+    @GetMapping("/request")
     public String checkAvailability(Model model, Authentication auth){
         Request request = new Request();
         if (auth != null){
