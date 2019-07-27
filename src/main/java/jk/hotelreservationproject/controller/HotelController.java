@@ -73,6 +73,8 @@ public class HotelController {
                                     Authentication auth, Model model,
                                     BindingResult bindingResult){
         if (bindingResult.hasErrors()){
+
+
             return "/index";
         }
         if (auth != null){
