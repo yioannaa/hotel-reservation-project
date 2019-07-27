@@ -5,6 +5,7 @@ import jk.hotelreservationproject.model.Category;
 import jk.hotelreservationproject.model.Request;
 import jk.hotelreservationproject.model.Reservation;
 import jk.hotelreservationproject.service.*;
+import jk.hotelreservationproject.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 import java.util.List;
 
@@ -34,6 +37,7 @@ public class HotelController {
         this.userService = userService;
         this.autoMailingService = autoMailingService;
     }
+
 
     @GetMapping("/")
     public String home(Model model, Authentication auth){
@@ -93,6 +97,7 @@ public class HotelController {
     }
 
 
+
     @GetMapping("/about")
     public String about(Model model, Authentication auth){
         if (auth != null){
@@ -119,5 +124,6 @@ public class HotelController {
         }
         return "/rooms";
     }
+
 
 }

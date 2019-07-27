@@ -9,6 +9,7 @@ import jk.hotelreservationproject.validation.ValidateDateRange;
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -50,6 +51,20 @@ public class Request{
         String [] lastDayStr = lastDay.split("/");
         this.lastDay = LocalDateTime.of(Integer.parseInt(lastDayStr[2]), Integer.parseInt(lastDayStr[0]),Integer.parseInt(lastDayStr[1]),0,0 );
         this.lastDay.format(DateTimeFormatter.ofPattern("MM/dd/YYYY"));
+    }
+
+    public boolean isDateValid(){
+        LocalDateTime today = LocalDate.now().atTime(0,0);
+        if (firstDay.isBefore(today.plusDays(1))){
+            return false;
+        }
+        if(lastDay.isBefore(today)){
+            return false;
+        }
+        if (lastDay.isBefore(firstDay)){
+            return false;
+        }
+        return true;
     }
 
 }
