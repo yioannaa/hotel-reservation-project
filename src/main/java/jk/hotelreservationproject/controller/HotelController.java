@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -40,8 +41,8 @@ public class HotelController {
 
 
     @GetMapping("/")
-    public String home(Model model, Authentication auth){
-        Request request = new Request();
+    public String home(Request request, Model model, Authentication auth){
+//        Request request = new Request();
         if (auth != null){
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
             model.addAttribute("loggedEmail", userDetails.getUsername());
@@ -49,15 +50,16 @@ public class HotelController {
         List<Category> categories = categoryService.showAllCategories();
         model.addAttribute("categories", categories);
         model.addAttribute("request", request);
+
         return "/index";
     }
 
     @GetMapping("/index")
-    public String index(Model model, Authentication auth){
-        return home(model, auth);
+    public String index(@ModelAttribute Request request, Model model, Authentication auth){
+        return home(request, model, auth);
     }
 
-    @GetMapping("/addrequest")
+    @GetMapping("/request")
     public String checkAvailability(Model model, Authentication auth){
         Request request = new Request();
         if (auth != null){
@@ -72,8 +74,11 @@ public class HotelController {
     public String checkAvailability(@ModelAttribute Request request,
                                     Authentication auth,
                                     Model model,
-                                    BindingResult bindingResult){
-        if (bindingResult.hasErrors() ||!(request.isDateValid())){
+                                    BindingResult bindingResult,
+                                    RedirectAttributes ra){
+        boolean dateValidation = request.isDateValid();
+        if (bindingResult.hasErrors() ||!(dateValidation)){
+            ra.addFlashAttribute("dateValidation", dateValidation);
             return "redirect:/";
         }
         if (auth != null){
@@ -87,6 +92,8 @@ public class HotelController {
         reservation.setEmail(request.getEmail());
         reservation.setFirstDay(request.getFirstDay());
         reservation.setLastDay(request.getLastDay());
+
+        System.out.println(reservation.getFirstDay());
         reservation.setNumberOfGuests(request.getNumberOfGuests());
         reservation.setRoomCategory(request.getRoomCategory());
         model.addAttribute("reservation", reservation);

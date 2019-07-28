@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 @Data
@@ -35,10 +36,10 @@ public class Reservation {
     private User user;
     @DateTimeFormat(pattern = "MM/dd/yyyy")
 //    @NotBlank(message = "Arrival date cannot be blank")
-    private LocalDateTime firstDay;
+    private LocalDate firstDay;
     @DateTimeFormat(pattern = "MM/dd/yyyy")
 //    @NotBlank(message = "Arrival date cannot be blank")
-    private LocalDateTime lastDay;
+    private LocalDate lastDay;
     private int numberOfGuests;
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -57,5 +58,6 @@ public class Reservation {
         this.numberOfGuests = request.getNumberOfGuests();
         this.roomCategory = request.getRoomCategory();
     }
+
 
 }
