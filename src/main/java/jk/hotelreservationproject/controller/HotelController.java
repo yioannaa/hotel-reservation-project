@@ -12,9 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -54,22 +52,6 @@ public class HotelController {
         return "/index";
     }
 
-    @GetMapping("/index")
-    public String index(@ModelAttribute Request request, Model model, Authentication auth){
-        return home(request, model, auth);
-    }
-
-    @GetMapping("/request")
-    public String checkAvailability(Model model, Authentication auth){
-        Request request = new Request();
-        if (auth != null){
-            UserDetails userDetails = (UserDetails) auth.getPrincipal();
-            model.addAttribute("loggedEmail", userDetails.getUsername());
-        }
-        model.addAttribute("request", request);
-        return "/request";
-    }
-
     @PostMapping("/")
     public String checkAvailability(@ModelAttribute Request request,
                                     Authentication auth,
@@ -92,17 +74,44 @@ public class HotelController {
         reservation.setEmail(request.getEmail());
         reservation.setFirstDay(request.getFirstDay());
         reservation.setLastDay(request.getLastDay());
-
-        System.out.println(reservation.getFirstDay());
         reservation.setNumberOfGuests(request.getNumberOfGuests());
         reservation.setRoomCategory(request.getRoomCategory());
         model.addAttribute("reservation", reservation);
-//        reservationService.saveReservation(reservation);
-//        autoMailingService.sendMessage(reservation.getEmail(),
-//                "Hotel Message Confirmation",
-//                "Thank you for your reservation :)");
         return "/request";
     }
+
+    @GetMapping("/index")
+    public String index(@ModelAttribute Request request, Model model, Authentication auth){
+        return home(request, model, auth);
+    }
+
+    @GetMapping("/request")
+    public String checkAvailability(Model model, Authentication auth){
+        Request request = new Request();
+        if (auth != null){
+            UserDetails userDetails = (UserDetails) auth.getPrincipal();
+            model.addAttribute("loggedEmail", userDetails.getUsername());
+        }
+        model.addAttribute("request", request);
+        return "/request";
+    }
+
+    @PostMapping("/request")
+    public String createReservation(@RequestParam Request request, @ModelAttribute Model model, Reservation reservation){
+        reservation.setEmail(request.getEmail());
+        reservation.setFirstDay(request.getFirstDay());
+        reservation.setLastDay(request.getLastDay());
+        reservation.setNumberOfGuests(request.getNumberOfGuests());
+        reservation.setRoomCategory(request.getRoomCategory());
+        model.addAttribute("reservation", reservation);
+        reservationService.saveReservation(reservation);
+        //        autoMailingService.sendMessage(reservation.getEmail(),
+//                "Hotel Message Confirmation",
+//                "Thank you for your reservation :)");
+        return "redirect:/";
+    }
+
+
 
 
 
