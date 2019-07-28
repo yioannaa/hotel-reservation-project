@@ -70,14 +70,15 @@ public class HotelController {
             request.setEmail(auth.getName());
         }
         requestService.saveRequest(request);
-        Reservation reservation = new Reservation();
-        reservation.setEmail(request.getEmail());
-        reservation.setFirstDay(request.getFirstDay());
-        reservation.setLastDay(request.getLastDay());
-        reservation.setNumberOfGuests(request.getNumberOfGuests());
-        reservation.setRoomCategory(request.getRoomCategory());
-        model.addAttribute("reservation", reservation);
-        return "/request";
+//        Reservation reservation = new Reservation();
+//        reservation.setEmail(request.getEmail());
+//        reservation.setFirstDay(request.getFirstDay());
+//        reservation.setLastDay(request.getLastDay());
+//        reservation.setNumberOfGuests(request.getNumberOfGuests());
+//        reservation.setRoomCategory(request.getRoomCategory());
+//        model.addAttribute("reservation", reservation);
+        ra.addFlashAttribute("request", request);
+        return "redirect:/request";
     }
 
     @GetMapping("/index")
@@ -87,23 +88,24 @@ public class HotelController {
 
     @GetMapping("/request")
     public String checkAvailability(Model model, Authentication auth){
-        Request request = new Request();
+        Request request = (Request) model.asMap().get("request");
+        Reservation reservation = new Reservation();
         if (auth != null){
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
             model.addAttribute("loggedEmail", userDetails.getUsername());
         }
-        model.addAttribute("request", request);
-        return "/request";
-    }
-
-    @PostMapping("/request")
-    public String createReservation(@RequestParam Request request, @ModelAttribute Model model, Reservation reservation){
         reservation.setEmail(request.getEmail());
         reservation.setFirstDay(request.getFirstDay());
         reservation.setLastDay(request.getLastDay());
         reservation.setNumberOfGuests(request.getNumberOfGuests());
         reservation.setRoomCategory(request.getRoomCategory());
         model.addAttribute("reservation", reservation);
+//        model.addAttribute("request", request);
+        return "/request";
+    }
+
+    @PostMapping("/request")
+    public String createReservation(@ModelAttribute Reservation reservation){
         reservationService.saveReservation(reservation);
         //        autoMailingService.sendMessage(reservation.getEmail(),
 //                "Hotel Message Confirmation",

@@ -1,5 +1,6 @@
 package jk.hotelreservationproject.model;
 
+import jk.hotelreservationproject.helper.DateTimeHelper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -42,15 +43,13 @@ public class Request{
     private Category roomCategory;
 
     public void setFirstDay(String firstDay) {
-        String [] firstDayStr = firstDay.split("/");
-        this.firstDay = LocalDate.of(Integer.parseInt(firstDayStr[2]), Integer.parseInt(firstDayStr[0]),Integer.parseInt(firstDayStr[1]));
-        this.firstDay.format(DateTimeFormatter.ofPattern("MM/dd/YYYY"));
+        DateTimeHelper dtf = new DateTimeHelper();
+        this.firstDay = dtf.parseDate(firstDay);
     }
 
     public void setLastDay(String lastDay) {
-        String [] lastDayStr = lastDay.split("/");
-        this.lastDay = LocalDate.of(Integer.parseInt(lastDayStr[2]), Integer.parseInt(lastDayStr[0]),Integer.parseInt(lastDayStr[1]));
-        this.lastDay.format(DateTimeFormatter.ofPattern("MM/dd/YYYY"));
+        DateTimeHelper dtf = new DateTimeHelper();
+        this.lastDay = dtf.parseDate(lastDay);
     }
 
     public boolean isDateValid(){

@@ -2,6 +2,7 @@ package jk.hotelreservationproject.service;
 
 import jk.hotelreservationproject.model.Reservation;
 import jk.hotelreservationproject.repository.ReservationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -136,17 +136,22 @@
                         <p class="help-block text-danger"
                            th:errors="*{phone}"></p>
                     </div>
+
+
+
                     <div class="form-group">
                         <input type="text" id="firstDay"
                                th:field="*{firstDay}"
-                               th:value="${request.getFirstDay()}" disabled
+                               th:value="${reservation.getFirstDay()}"
                                class="form-control checkin_date"
-                               placeholder="Arrival">
+                               placeholder="Arrival"
+                               readonly="readonly">
                     </div>
                     <div class="form-group">
                         <input type="text" id="lastDay"
                                th:field="*{lastDay}"
-                               th:value="${request.getLastDay()}" disabled
+                               th:value="${reservation.getLastDay()}"
+                               readonly="readonly"
                                class="form-control checkout_date"
                                placeholder="Departure">
                     </div>
@@ -154,20 +159,23 @@
                         <input type="hidden"
                                id="roomCategory"
                                th:field="*{roomCategory}"
-                               th:value="${request.getRoomCategory().getId()}"
-                               disabled placeholder="NumberOfGuests">
+                               th:value="${reservation.getRoomCategory().getId()}"
+                               readonly="readonly"
+                               placeholder="RoomCategory">
 
                     <div class="form-group">
                         <input type="text" class="form-control"
                                id="roomCategoryName"
-                               th:value="${request.getRoomCategory().getCategoryName()}"
-                               disabled placeholder="NumberOfGuests">
+                               th:value="${reservation.getRoomCategory().getCategoryName()}"
+                               readonly="readonly"
+                               placeholder="RoomCategory">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="noGuests"
                                th:field="*{numberOfGuests}"
-                               th:value="${request.getNumberOfGuests()}"
-                               disabled placeholder="NumberOfGuests">
+                               th:value="${reservation.getNumberOfGuests()}"
+                               readonly="readonly"
+                               placeholder="NumberOfGuests">
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Send Reservation"
